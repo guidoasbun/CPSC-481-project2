@@ -5,15 +5,21 @@ class GameOfNim(Game):
     def __init__(self, board=None):
         if board is None:
             board = [7, 5, 3, 1]
-
-        self.initial = GameState(to_move='MAX', utility=0, board=board, moves=None)
-
+            
+        # Create initial state
+        initial = GameState(to_move='MAX', utility=0, board=board, moves=None)
+        
+        # Calculate and set the initial moves
         initial_moves = []
         for row in range(len(board)):
             for num_objects in range(1, board[row] + 1):
                 initial_moves.append((row, num_objects))
-        
-        self.initial.moves = GameState(to_move='MIN', utility=0, board=board, moves=initial_moves)
+                
+        # Create the initial state with the calculated moves
+        self.initial = GameState(to_move='MAX', 
+                               utility=0, 
+                               board=board, 
+                               moves=initial_moves)
 
     def actions(self, state):
         moves = []
