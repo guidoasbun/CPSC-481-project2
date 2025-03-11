@@ -8,6 +8,13 @@ class GameOfNim(Game):
 
         self.initial = GameState(to_move='MAX', utility=0, board=board, moves=None)
 
+        initial_moves = []
+        for row in range(len(board)):
+            for num_objects in range(1, board[row] + 1):
+                initial_moves.append((row, num_objects))
+        
+        self.initial.moves = GameState(to_move='MIN', utility=0, board=board, moves=initial_moves)
+
     def actions(self, state):
         moves = []
         for row in range(len(state.board)):
