@@ -42,7 +42,7 @@ class GameOfNim(Game):
         # Calculate utility
         utility = 0
         if sum(board) == 0:
-            utility = -1 if next_player == 'MAX' else 1
+            utility = -1 if next_player == 'MAX' else -1
 
         # Calculate new valid moves
         new_moves = []
