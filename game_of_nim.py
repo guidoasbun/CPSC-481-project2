@@ -5,9 +5,6 @@ class GameOfNim(Game):
     def __init__(self, board=None):
         if board is None:
             board = [7, 5, 3, 1]
-            
-        # Create initial state
-        initial = GameState(to_move='MAX', utility=0, board=board, moves=None)
         
         # Calculate and set the initial moves
         initial_moves = []
@@ -32,16 +29,26 @@ class GameOfNim(Game):
         board = state.board.copy()
         row, num_objects = move
 
+        # Validate the move
         if row < 0 or row >= len(board) or num_objects > board[row]:
             return state
         
+        # Apply the move
         board[row] -= num_objects
 
+        # Calculate next player
         next_player = 'MIN' if state.to_move == 'MAX' else 'MAX'
 
+        # Calculate utility
         utility = 0
         if sum(board) == 0:
             utility = -1 if next_player == 'MAX' else 1
+
+        # Calculate new valid moves
+        new_moves = []
+        for row in range(len(board)):
+            for num_objects in range(1, board[row] + 1):
+                new_moves.append((row, num_objects))
 
         return GameState(to_move=next_player,
                         utility=utility,
