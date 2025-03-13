@@ -47,11 +47,6 @@ class GameOfNim(Game):
         # Calculate new valid moves
         # Generate new valid moves based on the updated board
         new_moves = [(row, num_objects) for row in range(len(board)) for num_objects in range(1, board[row] + 1)]
-        # new_moves = []
-        # for row in range(len(board)):
-        #     for num_objects in range(1, board[row] + 1):
-        #         new_moves.append((row, num_objects))
-
         return GameState(to_move=next_player,
                         utility=utility,
                         board=board,
@@ -59,7 +54,6 @@ class GameOfNim(Game):
 
     def utility(self, state, player):
         """Return the value to player; 1 for win, -1 for loss, 0 otherwise."""
-        # return state.utility if player == 'MAX' else -state.utility
         return 1 if state.utility == 1 and player == 'MAX' else -1 if state.utility == -1 and player == 'MIN' else 0
 
     def terminal_test(self, state):
@@ -72,7 +66,6 @@ class GameOfNim(Game):
 
 
 if __name__ == "__main__":
-    #nim = GameOfNim(board=[0, 5, 3, 1]) # Creating the game instance
     nim = GameOfNim(board=[7, 5, 3, 1]) # a much larger tree to search
     result_state = nim.result(nim.initial, (1,2)) # computer moves first
     print(nim.initial.board) # must be [0, 5, 3, 1]
