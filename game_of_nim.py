@@ -42,7 +42,7 @@ class GameOfNim(Game):
         # Calculate utility
         utility = 0
         if sum(board) == 0:
-            utility = -1 if next_player == 'MAX' else 1
+            utility = 1 if next_player == 'MAX' else -1
 
         # Calculate new valid moves
         # Generate new valid moves based on the updated board
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     print(nim.initial.moves) # must be [(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 1), (2, 2), (2, 3), (3, 1)]
     print(nim.result(nim.initial, (1,3)).board)
     utility = nim.play_game(alpha_beta_player, query_player) # computer moves first 
-    if utility < 0:
+    if utility == -1:
         print("MIN won the game")
     else:
         print("MAX won the game")
