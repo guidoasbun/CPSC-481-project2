@@ -45,10 +45,12 @@ class GameOfNim(Game):
             utility = -1 if next_player == 'MAX' else 1
 
         # Calculate new valid moves
-        new_moves = []
-        for row in range(len(board)):
-            for num_objects in range(1, board[row] + 1):
-                new_moves.append((row, num_objects))
+        # Generate new valid moves based on the updated board
+        new_moves = [(row, num_objects) for row in range(len(board)) for num_objects in range(1, board[row] + 1)]
+        # new_moves = []
+        # for row in range(len(board)):
+        #     for num_objects in range(1, board[row] + 1):
+        #         new_moves.append((row, num_objects))
 
         return GameState(to_move=next_player,
                         utility=utility,
